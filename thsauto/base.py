@@ -48,18 +48,19 @@ def init_navigation(x):
 
 
 def get_balance(d: u2.Device) -> Dict[str, str]:
-    root = d(resourceId="com.hexin.plat.android:id/recyclerview_id")
+    root = d(resourceId="com.hexin.plat.android:id/scroller")
     root.fling.toBeginning()
     root.fling.toBeginning()
 
     x = XPath(d)
     x.dump_hierarchy()
+    
     path2 = '//*[@resource-id="com.hexin.plat.android:id/main_layout"]/android.widget.LinearLayout[1]/android.widget.LinearLayout[2]/descendant::android.widget.TextView/@text'
     path4 = '//*[@resource-id="com.hexin.plat.android:id/main_layout"]/android.widget.LinearLayout[1]/android.widget.LinearLayout[4]/descendant::android.widget.TextView/@text'
     nums = x.xpath(f'{path2} | {path4}')
 
     names = ['总资产', '浮动盈亏', '当日参考盈亏', '当日参考盈亏率', '持仓市值', '可用资金', '可取资金']
-
+    print(nums)
     return dict(zip(names, nums))
 
 

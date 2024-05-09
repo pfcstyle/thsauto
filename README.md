@@ -1,26 +1,35 @@
 # thsauto
+
 同花顺Android版模拟炒股自动化测试封装
 
 ## 目标用户
+
 只适合资金量少的散户。自动化测试技术速度慢，稳定性也一般，达不到专业人士的要求。
 
 资金量大的个人或机构，请使用专业软件。如：迅投QMT、恒生PTrade、掘金量化、卡方科技等，或券商自研软件。
 它们带扫文件单功能，能实现批量委托，速度更快。注意：软件虽支持，但券商可能不开放扫单权限，请提前向客户经理认真确认。
 
 ## 起源
+
 [THSTrader](https://github.com/nladuo/THSTrader) 项目代码优化不够，安装了大量库效率低。所以决定学习后重写。
 
 ## 对比
+
 ### [easytrader](https://github.com/shidenggui/easytrader)
+
 1. 原理：`pywinauto`进行鼠标键盘模拟
 2. 优点：PC版客户端可以设置省略弹出框，所以委托速度还行。下一笔约1~2秒，但赶不上专用软件的扫单功能。
 3. 缺点：PC版新客户端复制列表时需要输入验证码，由于鼠标键盘占用，所以得独占电脑
+
 ### [THSTrader](https://github.com/nladuo/THSTrader)
-1. 原理：使用Google的`UIAutomator`技术进行辅助控制。使用`easyocr`对截图进行文本识别
+
+1. 原理：使用Google的 `UIAutomator`技术进行辅助控制。使用 `easyocr`对截图进行文本识别
 2. 优点：Android版比PC版支持的券商更多
-3. 缺点：截图识别效率太低、速度慢。截图对位置大小有要求，分辨率不能随意改动。依赖`pytorch`等库，还需外网下载识别模型。
+3. 缺点：截图识别效率太低、速度慢。截图对位置大小有要求，分辨率不能随意改动。依赖 `pytorch`等库，还需外网下载识别模型。
+
 ### [thsauto](https://github.com/wukan1986/thsauto)
-1. 原理：使用Google的`UIAutomator`技术进行辅助控制。使用`XPath`进行文字提取，跳过了文本识别
+
+1. 原理：使用Google的 `UIAutomator`技术进行辅助控制。使用 `XPath`进行文字提取，跳过了文本识别
 2. 优点：支持的券商多。支持本地和远程，不占用鼠标键盘，不独占电脑
 3. 缺点：Android版客户端没有跳过弹出对话框的设置，所以速度要慢于PC版。下一笔约3~5秒。目前还无法与无障碍工具联动
 
@@ -29,62 +38,79 @@
 - 市场占有率(越大越好)：Android > PC，所以在不能使用easytrader的情况下也许能用thsauto/THSTrader
 
 ## `uiautomator2`的局限
+
 1. 查询界面时，不可见部分查询不到，需要滑动实现
 2. 无法遍历列表控件，通过滑动变通实现，很难保证不重复、不遗漏
 3. 持仓列表不会重复，委托列表由于报单速度慢，重复的可能性小
 4. 设置分辨率长屏，同时显示更多行，需要滑动的次数少，能缓解此局限
-5. 可惜，目前无法与`无障碍服务`共存
+5. 可惜，目前无法与 `无障碍服务`共存
 
 ## 安装
+
 ```commandline
 # 普通版
 pip install -U thsauto
 # CLI版和Web版
 pip install -U thsauto[cli]
 ```
+
 或二次开发
+
+
+在Lib/site-packages目录下添加.pth文件，里面写上当前工程目录，比如：I:\python\ths\thsauto
+
+
 ```commandline
 git clone --depth=1 https://github.com/wukan1986/thsauto.git
 cd thsauto
-pip install -e .[cli]
+pip install -r requirements.txt
 ```
 
 ## 安装雷电模拟器
-下载页：https://ldmnq.com/other/version-history-and-release-notes.html  
-安装包名类似于`ldinst_9.0.57.2.exe`，约400MB~500MB，而不是`ldplayer9_ld_112_ld.exe`（约3MB）
+
+下载页：https://ldmnq.com/other/version-history-and-release-notes.html
+安装包名类似于 `ldinst_9.0.57.2.exe`，约400MB~500MB，而不是 `ldplayer9_ld_112_ld.exe`（约3MB）
 
 ## 模拟器设置分辨率
+
 1. 软件设置 -> 性能设置 -> 手机版 ->720*1280(dpi 320)
-    - 此分变率在`weditor`显示中正好匹配，可用于二次开发。
+   - 此分变率在 `weditor`显示中正好匹配，可用于二次开发。
 2. 自定义-> 360*1500(dpi 180)
-    - 实盘时，此分变率在本人电脑`2560*1600`下比较合适
-    - 宽360小于720，字体小，界面中可以显示更多行
-    - 高1500小于1600，能显示更多行，又能防止长屏过长时软件界面压缩导致界面模糊
-    - dpi 120与dpi 180显示的委托列表行数一样多，目前使用的dpi 180
-    
+   - 实盘时，此分变率在本人电脑 `2560*1600`下比较合适
+   - 宽360小于720，字体小，界面中可以显示更多行
+   - 高1500小于1600，能显示更多行，又能防止长屏过长时软件界面压缩导致界面模糊
+   - dpi 120与dpi 180显示的委托列表行数一样多，目前使用的dpi 180
+
 ## 安装同花顺APP
-下载页：https://m.10jqka.com.cn/ 右上角按钮进行下载。需下载Android版(文件扩展名为`apk`)
+
+下载页：https://m.10jqka.com.cn/ 右上角按钮进行下载。需下载Android版(文件扩展名为 `apk`)
 
 ## 安装配置ADB
-将安装路径`D:\leidian\LDPlayer9`添加到`环境变量`后可在控制台中使用`adb`命令
+
+将安装路径 `D:\leidian\LDPlayer9`添加到 `环境变量`后可在控制台中使用 `adb`命令
 
 ## 测试连接模拟器
-查看模拟器设备名，一般默认值为`emulator-5554`
+
+查看模拟器设备名，一般默认值为 `emulator-5554`
+
 ```commandline
 adb kill-server
 adb devices
 ```
 
 ## 演示
-本自动化测试工具没有`登录`和`切换账号`功能，所以需要用户自己先打开指定界面。
+
+本自动化测试工具没有 `登录`和 `切换账号`功能，所以需要用户自己先打开指定界面。
+
 1. 打开同花顺APP
 2. 最下导航栏 -> 交易
 3. 最上导航栏 -> 模拟 或 A股
 4. 点击中间区域（买入、卖出、撤单、持仓、查询）五个图标按钮中任意一个，即可进入交易界面
-5. 然后可以运行`demo.py`
+5. 然后可以运行 `demo.py`
 6. 注意：任何步骤执行完毕，都不应当出现弹出对话框未关闭的情况，否则会阻断之后的执行。如果遇到能复现的错误，请截图并保留日志
 
 ### VSCode运行[demo示例](examples/demo.py)
+
 ```python
 from thsauto import THS
 
@@ -179,7 +205,8 @@ confirm, prompt
 ```
 
 ## Web服务
-为实现跨语言的调用，还使用`FastAPI`实现了Web服务。注意：需使用`pip install -U thsauto[cli]`安装
+
+为实现跨语言的调用，还使用 `FastAPI`实现了Web服务。注意：需使用 `pip install -U thsauto[cli]`安装
 
 ```commandline
 # 启动Web服务
@@ -201,7 +228,8 @@ curl http://127.0.0.1:5000/cancel/0  # get_orders后的顺序
 ```
 
 ## CLI命令
-同时还提供了`CLI`接口，它实际上访问`Web`服务来实现相应功能，所以需先启动服务。注意：需使用`pip install -U thsauto[cli]`安装
+
+同时还提供了 `CLI`接口，它实际上访问 `Web`服务来实现相应功能，所以需先启动服务。注意：需使用 `pip install -U thsauto[cli]`安装
 
 ```commandline
 # 启动Web服务
@@ -221,6 +249,7 @@ thsauto cancel --idx=0
 ```
 
 如果之前启动时使用的是特殊IP和端口，可以通过环境变量临时设定
+
 ```commandline
 # 启动Web服务
 thsauto run --host=127.0.0.1 --port=8080
@@ -238,8 +267,10 @@ thsauto connect --addr=emulator-5554
 ```
 
 ## 聚宽远程下单
-本功能基于`Web服务`和`CLI命令`
-1. `Web服务`: 安装在远程云服务器上，接收来自聚宽的`HTTP`请求
-2. `CLI命令`: 部署在客户端，将`Python调用`转换成`HTTP`请求
 
-仅复制`cli.py`文件或代码到聚宽中，部分修改调用。详情参考[joinquant示例](examples/joinquant.py)
+本功能基于 `Web服务`和 `CLI命令`
+
+1. `Web服务`: 安装在远程云服务器上，接收来自聚宽的 `HTTP`请求
+2. `CLI命令`: 部署在客户端，将 `Python调用`转换成 `HTTP`请求
+
+仅复制 `cli.py`文件或代码到聚宽中，部分修改调用。详情参考[joinquant示例](examples/joinquant.py)
