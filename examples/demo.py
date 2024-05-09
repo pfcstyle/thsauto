@@ -9,9 +9,9 @@ from thsauto import THS
 # 然后再在其它账号下`debug=True`模式下测试
 # 最后是其它账号下`debug=False`下交易
 t = THS(debug=True, skip_popup=False)
-t.connect(addr="emulator-5554")
+# t.connect(addr="emulator-5554")
 # t.connect(addr="38edccd4")
-# t.connect(addr="192.168.31.20:40851")
+t.connect(addr="127.0.0.1:62001")
 
 # %%
 # 可事后再改成可以下单，也可以在下单函数中指定

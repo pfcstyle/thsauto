@@ -48,6 +48,7 @@ def init_navigation(x):
 
 
 def get_balance(d: u2.Device) -> Dict[str, str]:
+    print("code change")
     root = d(resourceId="com.hexin.plat.android:id/scroller")
     root.fling.toBeginning()
     root.fling.toBeginning()
