@@ -7,3 +7,4 @@ uvicorn[standard]
 fire
 requests
 weditor
+uiautodev

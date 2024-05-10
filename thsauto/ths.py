@@ -53,7 +53,7 @@ class THS:
         """
         with Timer():
             self.d = u2.connect(addr)
-            self.d.implicitly_wait(3.0)
+            # self.d.implicitly_wait(3.0)
             # 这里会引导环境准备
             return self.d.info
 
