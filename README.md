@@ -56,14 +56,13 @@ pip install -U thsauto[cli]
 
 或二次开发
 
-
 在Lib/site-packages目录下添加.pth文件，里面写上当前工程目录，比如：I:\python\ths\thsauto
-
 
 ```commandline
 git clone --depth=1 https://github.com/wukan1986/thsauto.git
 cd thsauto
-pip install -r requirements.txt
+set PYTHONUTF8=1
+pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
 ## 安装雷电模拟器
