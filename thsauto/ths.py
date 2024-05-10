@@ -8,6 +8,7 @@ from .base import get_balance, get_positions, get_orders, buy, sell, cancel_sing
 from .parse import parse_confirm_order, parse_orders, parse_positions, parse_balance, parse_confirm_cancel
 from .utils import Timer
 from .xpath import XPath
+from .const import *
 
 
 class THS:
@@ -80,12 +81,13 @@ class THS:
             if exists_tab(self.d, tab):
                 return
         # 最后补救一次
-        self.d(resourceId="com.hexin.plat.android:id/btn", text=tab).click()
+        
+        self.d(resourceId=RESOURCE_ID_BTN, text=tab).click()
 
     def refresh(self) -> Dict[str, float]:
         """刷新"""
         with Timer():
-            self.d(resourceId="com.hexin.plat.android:id/refresh_img").click()
+            self.d(resourceId=RESOURCE_ID_REFRESH).click()
             return {}
 
     def get_balance(self) -> Dict[str, float]:

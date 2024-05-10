@@ -1,4 +1,5 @@
-# Resource IDs
+########### Resource IDs
+# base.py
 RESOURCE_ID_SCROLLER = "com.hexin.plat.android:id/scroller"  # 滚动视图ID
 RESOURCE_ID_SCROLLVIEW = "com.hexin.plat.android:id/scrollView"  # 撤单滚动根视图ID
 RESOURCE_ID_MAIN_LAYOUT = "com.hexin.plat.android:id/main_layout"  # 主布局ID
@@ -19,7 +20,13 @@ RESOURCE_ID_CHE_BUY_BTN = "com.hexin.plat.android:id/che_buy_tv"  # 撤买按钮
 RESOURCE_ID_CHE_SELL_BTN = "com.hexin.plat.android:id/che_sell_tv"  # 撤卖按钮ID
 RESOURCE_ID_OPTION_CANCEL = "com.hexin.plat.android:id/option_cancel"  # 撤卖按钮ID
 RESOURCE_ID_DIALOG_CONTAINER = "com.hexin.plat.android:id/dialogplus_view_container" # 键盘精灵容器ID
-# XPath Constants
+
+# ths.py
+RESOURCE_ID_BTN = "com.hexin.plat.android:id/btn"
+RESOURCE_ID_REFRESH = "com.hexin.plat.android:id/refresh_img"
+
+########### XPath Constants
+# base.py
 XPATH_NAVIGATION_BAR = '//*[@resource-id="com.hexin.plat.android:id/btn"]/@bounds'  # 导航栏按钮边界XPath
 XPATH_BALANCE_LAYOUT1 = '//*[@resource-id="com.hexin.plat.android:id/main_layout"]/android.widget.LinearLayout[1]/android.widget.LinearLayout[2]/descendant::android.widget.TextView/@text'  # 资产信息显示XPath
 XPATH_BALANCE_LAYOUT2 = '//*[@resource-id="com.hexin.plat.android:id/main_layout"]/android.widget.LinearLayout[1]/android.widget.LinearLayout[4]/descendant::android.widget.TextView/@text'  # 备用资产信息显示XPath
