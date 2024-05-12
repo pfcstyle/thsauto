@@ -60,7 +60,7 @@ class THS:
 
     def home(self):
         """页首。这里记录了几个导航按钮的位置"""
-        with Timer():
+        with Timer('home'):
             assert self.d is not None, '请先执行`connect`'
             self.x = XPath(self.d)
             self.x.dump_hierarchy()
@@ -81,10 +81,15 @@ class THS:
             if exists_tab(self.d, tab):
                 return
         # 最后补救一次
-        
         self.d(resourceId=RESOURCE_ID_BTN, text=tab).click()
 
     def refresh(self) -> Dict[str, float]:
+        """刷新"""
+        with Timer():
+            self.d(resourceId=RESOURCE_ID_REFRESH).click()
+            return {}
+        
+    def refresh_chedan(self) -> Dict[str, float]:
         """刷新"""
         with Timer():
             self.d(resourceId=RESOURCE_ID_REFRESH).click()
@@ -98,11 +103,9 @@ class THS:
         dict
 
         """
-        with Timer():
+        with Timer('获取资产'):
             self.goto('持仓')
-        with Timer():
             self.balance = get_balance(self.d)
-        with Timer():
             return parse_balance(self.balance)
 
     def get_positions(self) -> pd.DataFrame:

@@ -134,7 +134,7 @@ def exists_tab(d: u2.Device, tab: str):
     if tab == '撤单':
         root = d(resourceId=RESOURCE_ID_SCROLLVIEW)
     if tab == '持仓':
-        root = d(resourceId=RESOURCE_ID_RECYCLER_VIEW)
+        root = d(resourceId=RESOURCE_ID_SCROLLER)
     return root.wait(exists=True, timeout=1.0)
 
 

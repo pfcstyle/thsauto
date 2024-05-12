@@ -1,7 +1,7 @@
 ########### Resource IDs
 # base.py
 RESOURCE_ID_SCROLLER = "com.hexin.plat.android:id/scroller"  # 滚动视图ID
-RESOURCE_ID_SCROLLVIEW = "com.hexin.plat.android:id/scrollView"  # 撤单滚动根视图ID
+RESOURCE_ID_SCROLLVIEW = "com.hexin.plat.android:id/chedan_listview"  # 撤单滚动根视图ID
 RESOURCE_ID_MAIN_LAYOUT = "com.hexin.plat.android:id/main_layout"  # 主布局ID
 RESOURCE_ID_RECYCLER_VIEW = "com.hexin.plat.android:id/recyclerview_id"  # 循环视图ID
 RESOURCE_ID_CHEDAN_RECYCLER_VIEW = "com.hexin.plat.android:id/chedan_recycler_view"  # 撤单循环视图ID
@@ -24,6 +24,7 @@ RESOURCE_ID_DIALOG_CONTAINER = "com.hexin.plat.android:id/dialogplus_view_contai
 # ths.py
 RESOURCE_ID_BTN = "com.hexin.plat.android:id/btn"
 RESOURCE_ID_REFRESH = "com.hexin.plat.android:id/refresh_img"
+RESOURCE_ID_REFRESH_CHEDAN = "com.hexin.plat.android:id/title_bar_img"
 
 ########### XPath Constants
 # base.py
