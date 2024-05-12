@@ -81,7 +81,7 @@ def _positions_in_view(x: XPath) -> Tuple[List[int], List[tuple]]:
 
 
 def get_positions(d: u2.Device) -> List[tuple]:
-    root = d(resourceId=RESOURCE_ID_RECYCLER_VIEW)
+    root = d(resourceId=RESOURCE_ID_SCROLLER)
     root.fling.toBeginning()
     root.fling.toBeginning()
 

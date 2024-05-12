@@ -100,7 +100,9 @@ class THS:
         """
         with Timer():
             self.goto('持仓')
+        with Timer():
             self.balance = get_balance(self.d)
+        with Timer():
             return parse_balance(self.balance)
 
     def get_positions(self) -> pd.DataFrame:
