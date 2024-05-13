@@ -196,7 +196,7 @@ class THS:
 
     def cancel_multiple(self, opt: str = 'all',
                         debug: Optional[bool] = None) -> Tuple[Dict[str, str], Dict[str, str]]:
-        """批量撤单
+        """批量撤单, 实盘才能使用
 
         Parameters
         ----------

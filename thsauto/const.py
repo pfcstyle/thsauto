@@ -4,7 +4,6 @@ RESOURCE_ID_SCROLLER = "com.hexin.plat.android:id/scroller"  # 滚动视图ID
 RESOURCE_ID_SCROLLVIEW = "com.hexin.plat.android:id/chedan_listview"  # 撤单滚动根视图ID
 RESOURCE_ID_MAIN_LAYOUT = "com.hexin.plat.android:id/main_layout"  # 主布局ID
 RESOURCE_ID_RECYCLER_VIEW = "com.hexin.plat.android:id/recyclerview_id"  # 循环视图ID
-RESOURCE_ID_CHEDAN_RECYCLER_VIEW = "com.hexin.plat.android:id/chedan_recycler_view"  # 撤单循环视图ID
 RESOURCE_ID_DIALOG_LAYOUT = "com.hexin.plat.android:id/dialog_layout"  # 对话框布局ID
 RESOURCE_ID_DIALOG_TITLE = "com.hexin.plat.android:id/dialog_title"  # 对话框标题ID
 RESOURCE_ID_PROMPT_CONTENT = "com.hexin.plat.android:id/prompt_content"  # 对话框内容ID
@@ -33,8 +32,8 @@ XPATH_BALANCE_LAYOUT1 = '//*[@resource-id="com.hexin.plat.android:id/main_layout
 XPATH_BALANCE_LAYOUT2 = '//*[@resource-id="com.hexin.plat.android:id/main_layout"]/android.widget.LinearLayout[1]/android.widget.LinearLayout[4]/descendant::android.widget.TextView/@text'  # 备用资产信息显示XPath
 XPATH_POSITIONS_RECYCLER_VIEW = '//*[@resource-id="com.hexin.plat.android:id/recyclerview_id"]/android.widget.RelativeLayout'  # 持仓信息的循环视图XPath
 XPATH_POSITIONS_TEXT_VIEW = '//*[@resource-id="com.hexin.plat.android:id/recyclerview_id"]/android.widget.RelativeLayout[{i}]/descendant::android.widget.TextView/@text'  # 持仓详细信息XPath
-XPATH_ORDERS_RECYCLER_VIEW = '//*[@resource-id="com.hexin.plat.android:id/chedan_recycler_view"]/android.widget.LinearLayout'  # 撤单信息的循环视图XPath
-XPATH_ORDERS_TEXT_VIEW = '//*[@resource-id="com.hexin.plat.android:id/chedan_recycler_view"]/android.widget.LinearLayout[{i}]/descendant::android.widget.TextView/@text'  # 撤单详细信息XPath
+XPATH_ORDERS_LIST_VIEW = '//*[@resource-id="com.hexin.plat.android:id/chedan_listview"]/android.widget.LinearLayout'  # 撤单信息的循环视图XPath
+XPATH_ORDERS_TEXT_VIEW = '//*[@resource-id="com.hexin.plat.android:id/chedan_listview"]/android.widget.LinearLayout[{i}]/descendant::android.widget.TextView/@text'  # 撤单详细信息XPath
 XPATH_DIALOG_LAYOUT = '//*[@resource-id="com.hexin.plat.android:id/dialog_layout"]/descendant::android.widget.TextView/@text'  # 对话框内文本信息XPath
 XPATH_DIALOG_TITLE = '//*[@resource-id="com.hexin.plat.android:id/dialog_title"]/@text'  # 对话框标题XPath
 XPATH_DIALOG_CONTENT = '//*[@resource-id="com.hexin.plat.android:id/prompt_content"]/@text'  # 对话框内容XPath

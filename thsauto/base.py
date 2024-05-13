@@ -105,14 +105,14 @@ def get_positions(d: u2.Device) -> List[tuple]:
 
 
 def _orders_in_view(x: XPath) -> Tuple[List[int], List[tuple], str]:
-    elements = x.xpath(XPATH_ORDERS_RECYCLER_VIEW)
+    elements = x.xpath(XPATH_ORDERS_LIST_VIEW)
     count = len(elements)
 
     last_status = ''
     list1 = []
     list2 = []
     for i in range(1, count + 1):
-        _path = XPATH_ORDERS_RECYCLER_VIEW.format(i=i)
+        _path = XPATH_ORDERS_TEXT_VIEW.format(i=i)
         tup = tuple(x.xpath(_path))
         logger.info("{} {}", i, tup)
         # ['全撤', '撤买', '撤卖']
@@ -215,14 +215,14 @@ def cancel_multiple(d: u2.Device, opt: str = 'all', debug=True) -> Tuple[Dict[st
 
     x = XPath(d)
     x.dump_hierarchy()
-    elements = x.xpath(XPATH_ORDERS_RECYCLER_VIEW)
+    elements = x.xpath(XPATH_ORDERS_LIST_VIEW)
     count = len(elements)
     if count == 0:
         logger.warning(f'count == 0, {count=}')
         return {}, {}
 
     # 滚动到指定位置
-    root = d(resourceId=RESOURCE_ID_CHEDAN_RECYCLER_VIEW)
+    root = d(resourceId=RESOURCE_ID_SCROLLVIEW)
     root.scroll.to(text='全撤')
     if not node.wait(exists=True, timeout=2.0):
         raise Exception("找不到 ['全撤', '撤买', '撤卖'] 三个按钮。请单笔委托撤单")
@@ -343,9 +343,6 @@ def cancel_single(d: u2.Device,
     return confirm, prompt
 
 
-btn_transaction = (0, 0)
-
-
 def _place_order(d: u2.Device, qty: int, price: float, symbol: str, code: str) -> Dict[str, str]:
     """下单动作。输入股票代码、股票名称、缩写都可以。只要在键盘精灵中排第一即可"""
     # 利用了nan的特点
@@ -420,21 +417,22 @@ def _place_order(d: u2.Device, qty: int, price: float, symbol: str, code: str) -
     if not_nan:
         node = d(resourceId=RESOURCE_ID_STOCKPRICE).child(className="android.widget.EditText")
         x.set_text(node, stockprice)
-
+    print("After pricing")
     # 在显示分辨率不同时，可能导致点击不到，但第二次又能点击到，所以初始化时这个按钮还没有完全生成，所以需要第二次操作
-    global btn_transaction
+    btn_transaction = (0, 0)
     for i in range(3):
         if btn_transaction == (0, 0):
             x.dump_hierarchy()
             btn_transaction = x.center(XPATH_BTN_TRANSACTION)
+            print("btn_transaction", btn_transaction)
             if i > 0:
                 time.sleep(0.5)
         else:
             # 从这跳出，表示成功
             break
     # 点击下单
-    x.click(*btn_transaction)
-
+    d(resourceId="com.hexin.plat.android:id/btn_transaction").click()
+    # x.click(x=btn_transaction[0], y=btn_transaction[1])
     return {}
 
 
@@ -444,7 +442,6 @@ def _place_order_auto(d: u2.Device, qty: int, price: float, symbol: str, code: s
     prompt = _place_order(d, qty, price, symbol, code)
     if len(prompt) > 0:
         return {}, prompt
-
     if skip_popup:
         # 跳过了自动点击功能，需交由第三方工具进行后面的点击操作，如`李跳跳`
         return confirm, prompt
