@@ -60,7 +60,7 @@ def get_balance(d: u2.Device) -> Dict[str, str]:
     nums = x.xpath(f'{XPATH_BALANCE_LAYOUT1} | {XPATH_BALANCE_LAYOUT2}')
 
     names = ['总资产', '浮动盈亏', '当日参考盈亏', '当日参考盈亏率', '持仓市值', '可用资金', '可取资金']
-    print(nums)
+    
     return dict(zip(names, nums))
 
 
