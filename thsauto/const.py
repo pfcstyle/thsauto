@@ -30,8 +30,8 @@ RESOURCE_ID_REFRESH_CHEDAN = "com.hexin.plat.android:id/title_bar_img"
 XPATH_NAVIGATION_BAR = '//*[@resource-id="com.hexin.plat.android:id/btn"]/@bounds'  # 导航栏按钮边界XPath
 XPATH_BALANCE_LAYOUT1 = '//*[@resource-id="com.hexin.plat.android:id/main_layout"]/android.widget.LinearLayout[1]/android.widget.LinearLayout[2]/descendant::android.widget.TextView/@text'  # 资产信息显示XPath
 XPATH_BALANCE_LAYOUT2 = '//*[@resource-id="com.hexin.plat.android:id/main_layout"]/android.widget.LinearLayout[1]/android.widget.LinearLayout[4]/descendant::android.widget.TextView/@text'  # 备用资产信息显示XPath
-XPATH_POSITIONS_RECYCLER_VIEW = '//*[@resource-id="com.hexin.plat.android:id/recyclerview_id"]/android.widget.RelativeLayout'  # 持仓信息的循环视图XPath
-XPATH_POSITIONS_TEXT_VIEW = '//*[@resource-id="com.hexin.plat.android:id/recyclerview_id"]/android.widget.RelativeLayout[{i}]/descendant::android.widget.TextView/@text'  # 持仓详细信息XPath
+XPATH_POSITIONS_RECYCLER_VIEW = '//androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout'  # 持仓信息的循环视图XPath
+XPATH_POSITIONS_TEXT_VIEW = '//androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[{i}]/descendant::android.widget.TextView/@text'  # 持仓详细信息XPath
 XPATH_ORDERS_LIST_VIEW = '//*[@resource-id="com.hexin.plat.android:id/chedan_listview"]/android.widget.LinearLayout'  # 撤单信息的循环视图XPath
 XPATH_ORDERS_TEXT_VIEW = '//*[@resource-id="com.hexin.plat.android:id/chedan_listview"]/android.widget.LinearLayout[{i}]/descendant::android.widget.TextView/@text'  # 撤单详细信息XPath
 XPATH_DIALOG_LAYOUT = '//*[@resource-id="com.hexin.plat.android:id/dialog_layout"]/descendant::android.widget.TextView/@text'  # 对话框内文本信息XPath

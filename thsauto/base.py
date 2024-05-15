@@ -70,7 +70,7 @@ def _positions_in_view(x: XPath) -> Tuple[List[int], List[tuple]]:
 
     list1 = []
     list2 = []
-    for i in range(1, count + 1):
+    for i in range(1, count):
         _path = XPATH_POSITIONS_TEXT_VIEW.format(i=i)
         tup = tuple(x.xpath(_path))
         logger.info("{} {}", i, tup)
