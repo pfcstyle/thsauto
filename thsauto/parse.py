@@ -48,7 +48,7 @@ def parse_positions(list2):
     df = pd.DataFrame.from_records(list2, columns=['名称', '市值', '盈亏', '盈亏率', '持仓', '可用', '成本', '现价'])
 
     df = df.apply(lambda x: x.str.replace(',', ''))
-    df['名称'] = df['名称'].str.replace(' ', '')
+    df['名称'] = df['名称']
     df[['市值', '盈亏', '成本', '现价']] = df[['市值', '盈亏', '成本', '现价']].astype(float)
     df[['持仓', '可用']] = df[['持仓', '可用']].astype(int)
     df['盈亏率'] = df['盈亏率'].str.replace('%', '').astype(float) / 100.0
