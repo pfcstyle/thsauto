@@ -37,7 +37,6 @@ def parse_orders(list2):
     df = pd.DataFrame.from_records(list2, columns=['名称', '委托时间', '委托价', '成交均价', '委托量', '已成交量', '买卖', '状态'])
 
     df = df.apply(lambda x: x.str.replace(',', ''))
-    df['名称'] = df['名称'].str.replace(' ', '')
 
     df[['委托价', '成交均价']] = df[['委托价', '成交均价']].astype(float)
     df[['委托量', '已成交量']] = df[['委托量', '已成交量']].astype(int)
