@@ -1,5 +1,6 @@
 from typing import Dict, Tuple, Any, Optional, Union
 
+import time
 import pandas as pd
 import uiautomator2 as u2
 
@@ -54,9 +55,62 @@ class THS:
         """
         with Timer():
             self.d = u2.connect(addr)
-            # self.d.implicitly_wait(3.0)
+            self.d.implicitly_wait(10.0)
             # 这里会引导环境准备
             return self.d.info
+        
+    def open_app(self) -> None:
+        """打开同花顺APP"""
+        with Timer("打开同花顺APP"):
+            assert self.d is not None, '请先执行`connect`'
+            self.d.app_start("com.hexin.plat.android")
+            self.d.app_wait("com.hexin.plat.android", front=True, timeout=10)
+
+    def close_app(self) -> None:
+        """关闭同花顺APP"""
+        with Timer("关闭同花顺APP"):
+            assert self.d is not None, '请先执行`connect`'
+            self.d.app_stop("com.hexin.plat.android")
+        
+    def enter_trade_page(self, trader_index: int = 1, pwd: str = "", debug: bool = None):
+        """进入交易页面
+        trader_index: int 券商索引
+        """
+        with Timer('进入交易页面'):
+            assert self.d is not None, '请先执行`connect`'
+            self.close_app()
+            self.open_app()
+            # 点击交易按钮
+            self.d.xpath('//*[@content-desc="交易"]/android.widget.ImageView[1]').click()
+            time.sleep(3)
+            debug = self.debug if debug is None else debug
+            if debug: 
+                # 模拟账号
+                self.d(resourceId="com.hexin.plat.android:id/moni_layout_view").click()
+            else:
+                self.d(resourceId="com.hexin.plat.android:id/tab_a").click()
+                # 点击券商
+                self.d.xpath(f'//*[@resource-id="com.hexin.plat.android:id/nobindlist"]/android.widget.LinearLayout[{trader_index}]').click()
+                # 输入交易密码
+                self.d(resourceId="com.hexin.plat.android:id/weituo_edit_trade_password").set_text(pwd)
+                self.d(resourceId="com.hexin.plat.android:id/weituo_btn_login").click()
+            # 点击持仓
+            retry_times = 2
+            success = False
+            while retry_times > 0:
+                retry_times -= 1
+                time.sleep(10)
+                self.d(resourceId="com.hexin.plat.android:id/menu_holdings").click()
+                time.sleep(10)
+                try:
+                    self.home()
+                    success = True
+                    break
+                except Exception as e:
+                    print(e)
+            if not success:
+                self.enter_trade_page(trader_index, pwd, debug)
+
 
     def home(self):
         """页首。这里记录了几个导航按钮的位置"""
