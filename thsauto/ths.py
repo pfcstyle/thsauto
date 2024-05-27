@@ -83,6 +83,10 @@ class THS:
             # 点击交易按钮
             self.d.xpath('//*[@content-desc="交易"]/android.widget.ImageView[1]').click()
             time.sleep(3)
+            # 自动弹出登录界面（有时候不弹，所以先关闭，统一为手动点击登录）
+            if self.d(resourceId="com.hexin.plat.android:id/login_component_base_view").exists(timeout=3):
+                # 关闭弹窗
+                self.d(resourceId="com.hexin.plat.android:id/login_component_base_view").child(resourceId="com.hexin.plat.android:id/close_button").click()
             debug = self.debug if debug is None else debug
             if debug: 
                 # 模拟账号
