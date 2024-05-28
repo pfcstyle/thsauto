@@ -83,6 +83,15 @@ class THS:
             time.sleep(3) # 等待一下  看看有没有广告之类的
             if self.d(resourceId="com.hexin.plat.android:id/feedBackView").exists(timeout=3):
                 self.d(resourceId="com.hexin.plat.android:id/feedBackView").child(resourceId="com.hexin.plat.android:id/closeBt").click()
+            # 查找根节点下第一层的FrameLayout，如果有多个，说明有弹窗，需要关闭
+            frame_layouts = self.d.xpath('//hierarchy/android.widget.FrameLayout').all()
+            if len(frame_layouts) > 1:
+                if self.d(resourceId="com.hexin.plat.android:id/closeBt").exists(timeout=3):
+                    self.d(resourceId="com.hexin.plat.android:id/closeBt").click()
+                if self.d(resourceId="com.hexin.plat.android:id/close_button").exists(timeout=3):
+                    self.d(resourceId="com.hexin.plat.android:id/close_button").click()
+            # if self.d(resourceId="com.hexin.plat.android:id/dialog_layout").exists(timeout=3):
+            #     self.d(resourceId="com.hexin.plat.android:id/feedBackView").child(resourceId="com.hexin.plat.android:id/closeBt").click()
             # 点击交易按钮
             self.d.xpath('//*[@content-desc="交易"]/android.widget.ImageView[1]').click()
             time.sleep(3)
