@@ -80,9 +80,10 @@ class THS:
             assert self.d is not None, '请先执行`connect`'
             self.close_app()
             self.open_app()
-            time.sleep(3) # 等待一下  看看有没有广告之类的
+            time.sleep(5) # 等待一下  看看有没有广告之类的
             if self.d(resourceId="com.hexin.plat.android:id/feedBackView").exists(timeout=3):
                 self.d(resourceId="com.hexin.plat.android:id/feedBackView").child(resourceId="com.hexin.plat.android:id/closeBt").click()
+            time.sleep(5) # 等待一下  看看有没有广告之类的
             # 查找根节点下第一层的FrameLayout，如果有多个，说明有弹窗，需要关闭
             frame_layouts = self.d.xpath('//hierarchy/android.widget.FrameLayout').all()
             if len(frame_layouts) > 1:
