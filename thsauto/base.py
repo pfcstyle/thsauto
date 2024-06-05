@@ -98,8 +98,15 @@ def get_positions(d: u2.Device) -> List[tuple]:
 
     # 只留固定格式
     lists = [_ for _ in lists if len(_) == 8]
-    # 去重
-    lists = sorted(set(lists), key=lists.index)
+
+    # lists: [('富满微', '125,328.00', '-760.35', '-0.600%', '4800', '0', '26.268', '26.110')]
+    # 根据第一个元素去重
+    unique_dict = {}
+    for sublist in lists:
+        key = sublist[0]
+        if key not in unique_dict:
+            unique_dict[key] = sublist
+    lists = list(unique_dict.values())
 
     return lists
 
@@ -417,14 +424,12 @@ def _place_order(d: u2.Device, qty: int, price: float, symbol: str, code: str) -
     if not_nan:
         node = d(resourceId=RESOURCE_ID_STOCKPRICE).child(className="android.widget.EditText")
         x.set_text(node, stockprice)
-    print("After pricing")
     # 在显示分辨率不同时，可能导致点击不到，但第二次又能点击到，所以初始化时这个按钮还没有完全生成，所以需要第二次操作
     btn_transaction = (0, 0)
     for i in range(3):
         if btn_transaction == (0, 0):
             x.dump_hierarchy()
             btn_transaction = x.center(XPATH_BTN_TRANSACTION)
-            print("btn_transaction", btn_transaction)
             if i > 0:
                 time.sleep(0.5)
         else:
