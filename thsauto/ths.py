@@ -179,7 +179,7 @@ class THS:
             self.balance = get_balance(self.d)
             return parse_balance(self.balance)
 
-    def get_positions(self) -> pd.DataFrame:
+    def get_positions(self, need_scroll: bool = True) -> pd.DataFrame:
         """查询持仓
 
         Returns
@@ -189,7 +189,7 @@ class THS:
         """
         with Timer():
             self.goto('持仓')
-            self.positions = get_positions(self.d)
+            self.positions = get_positions(self.d, need_scroll=need_scroll)
             return parse_positions(self.positions)
 
     def get_orders(self, break_after_done: bool = True) -> pd.DataFrame:
