@@ -56,4 +56,6 @@ def parse_positions(list2):
 
 def parse_balance(_dict: dict):
     _dict = {k: str2float(v) for k, v in _dict.items()}
+    if len(_dict) == 7:
+        _dict['当日参考盈亏率'] /= 100.
     return _dict

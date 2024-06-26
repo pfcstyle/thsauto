@@ -1,0 +1,7 @@
+diff a/thsauto/parse.py b/thsauto/parse.py	(rejected hunks)
+@@ -56,5 +56,4 @@
+ 
+ def parse_balance(_dict: dict):
+     _dict = {k: str2float(v) for k, v in _dict.items()}
+-    _dict['当日参考盈亏率'] /= 100.
+     return _dict
